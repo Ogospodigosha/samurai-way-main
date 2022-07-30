@@ -13,8 +13,6 @@ export const MyPosts = () => {
                 <div className={classes.posts}>
                     <Post message ={"Hi. how are you?"}/>
                     <Post message ={"Its my first post"}/>
-
-
                 </div>
             </div>)
 }
