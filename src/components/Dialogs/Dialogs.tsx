@@ -7,8 +7,8 @@ type DialogItemPropsType ={
     id: string
 }
 const DialogItem =(props: DialogItemPropsType)=> {
-    const path ="/dialogs/" + props.id
-   return (<div className={classes.dialog + " " + classes.active}>
+    let path ="/dialogs/" + props.id
+   return (<div className={classes.dialog}>
         <NavLink to={path}>{props.name}</NavLink>
     </div>)
 }
@@ -21,19 +21,27 @@ const Message =(props:MessagePropsType)=>{
 }
 
 export const Dialogs = () => {
+    let dialogsData = [
+        {id:"1", name: 'Gosha'},
+        {id:"2", name: 'Misha'},
+        {id:"3", name: 'Valera'},
+        {id:"4", name: 'Olga'}
+    ]
+    let messagesData = [
+        {id:1, message: 'Hi'},
+        {id:2, message: 'Yo'},
+        {id:3, message: 'How are you?'},
+        {id:4, message: 'Im fine'}
+    ]
+    let dialogsElements = dialogsData.map(el=><DialogItem name ={el.name} id={el.id}/> )
+    let messagesElements = messagesData.map(el=><Message name={el.message}/>)
     return (
         <div className={classes.dialogs}>
             <div className={classes.dialogsItems}>
-               <DialogItem name ="Gosha" id="1"/>
-               <DialogItem name ="Misha" id="2"/>
-               <DialogItem name ="Valera" id="3"/>
-               <DialogItem name ="Olga" id="4"/>
+                {dialogsElements}
             </div>
             <div className ={classes.messages}>
-                <Message name="Hi"/>
-                <Message name="Yo"/>
-                <Message name="How are you?"/>
-                <Message name="Im fine"/>
+                {messagesElements}
             </div>
         </div>
     );
