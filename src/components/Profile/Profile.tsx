@@ -3,12 +3,20 @@ import './Profile.module.css'
 import classes from './Profile.module.css'
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {AppPropsType} from "../../index";
+import {AppPropsType, Obj} from "../../redux/state";
 
-export const Profile = (props: AppPropsType) => {
+
+type profileType = {
+    ProfileState: {
+        posts: Array<Obj>
+    }
+}
+
+
+export const Profile = (props: profileType) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts posts = {props.posts}/>
+            <MyPosts posts={props.ProfileState.posts}/>
         </div>)
 }

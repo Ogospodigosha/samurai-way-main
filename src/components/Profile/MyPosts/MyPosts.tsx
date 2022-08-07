@@ -2,9 +2,13 @@ import React from "react";
 import './MyPosts.module.css'
 import classes from './MyPosts.module.css'
 import {Post} from "./Post/Post";
-import {AppPropsType} from "../../../index";
+import {AppPropsType, Obj} from "../../../redux/state";
 
-export const MyPosts = (props: AppPropsType) => {
+type MyPostsType = {
+    posts: Array<Obj>
+}
+
+export const MyPosts = (props: MyPostsType) => {
     let postsElements;
     if (props.posts) {
         postsElements = props.posts.map(el => <Post message={el.message} likeskount={el.likeskount}/>)
