@@ -1,3 +1,5 @@
+import {rerenderEntireTree} from "../render";
+
 export type AppPropsType = {
     posts?: Array<Obj>
     dialogsData?: Array<DialogsObj>
@@ -17,6 +19,7 @@ export type MessagesObj = {
     message: string
 }
 export type stateType ={
+    addPost: (postMessage: string)=>void
     state: {
         profilePage: {
             posts: Array<Obj>
@@ -49,5 +52,10 @@ let state = {
             {id: "4", name: 'Olga'}
         ]
     }
+}
+export const addPost=(postMessage: string)=>{
+    let newPost = {id:5, message: postMessage, likeskount:"4"}
+    state.profilePage.posts.push(newPost)
+    rerenderEntireTree(state);
 }
 export  default state

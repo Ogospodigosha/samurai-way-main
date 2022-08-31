@@ -9,7 +9,7 @@ type DialogItemPropsType ={
 export const DialogItem =(props: DialogItemPropsType)=> {
     let path ="/dialogs/" + props.id
    return (<div className={classes.dialog}>
-        <NavLink to={path}>{props.name}</NavLink>
+        <NavLink to={path}><img src="https://a.deviantart.net/avatars/b/l/blueoctober164.jpg?3"/> {props.name} </NavLink>
     </div>)
 }
 

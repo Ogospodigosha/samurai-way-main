@@ -16,7 +16,7 @@ export const Dialogs = (props: dialogsType) => {
     let dialogsElements;
     let messagesElements;
     if (props.dialogsState.dialogsData) {
-        dialogsElements = props.dialogsState.dialogsData.map(el=><DialogItem name ={el.name} id={el.id}/> )
+        dialogsElements = props.dialogsState.dialogsData.map(el=><DialogItem name ={el.name} id={el.id}  />  )
     }
 
     if (props.dialogsState.messagesData) {
@@ -26,6 +26,7 @@ export const Dialogs = (props: dialogsType) => {
     return (
         <div className={classes.dialogs}>
             <div className={classes.dialogsItems}>
+
                 {dialogsElements}
             </div>
             <div className ={classes.messages}>
