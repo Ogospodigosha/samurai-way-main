@@ -1,4 +1,6 @@
-import {rerenderEntireTree} from "../render";
+let  rerenderEntireTree =(state:{ profilePage: { posts: Obj[]; newPostText: string; }; dialogsPage: { messagesData: MessagesObj[]; dialogsData: DialogsObj[]; }; })=> {
+
+}
 
 export type AppPropsType = {
     posts?: Array<Obj>
@@ -19,10 +21,12 @@ export type MessagesObj = {
     message: string
 }
 export type stateType ={
-    addPost: (postMessage: string)=>void
+    updateNewPostText: (newText: string)=> void
+    addPost: ()=>void
     state: {
         profilePage: {
             posts: Array<Obj>
+            newPostText: string
         },
         dialogsPage: {
             messagesData:Array<MessagesObj>
@@ -35,8 +39,8 @@ let state = {
         posts: [
             {id: 1, message: 'Hi. how are you?', likeskount: "0"},
             {id: 2, message: 'Its my first post', likeskount: "23"}
-        ]
-
+        ],
+        newPostText: ""
     },
     dialogsPage: {
         messagesData: [
@@ -53,9 +57,19 @@ let state = {
         ]
     }
 }
-export const addPost=(postMessage: string)=>{
-    let newPost = {id:5, message: postMessage, likeskount:"4"}
+export const addPost=()=>{
+    let newPost = {id:5, message: state.profilePage.newPostText, likeskount:"0"}
     state.profilePage.posts.push(newPost)
+    state.profilePage.newPostText ="";
     rerenderEntireTree(state);
 }
+export const updateNewPostText=(newText: string)=>{
+    state.profilePage.newPostText = newText
+    rerenderEntireTree(state);
+}
+
+export const subscribe = (observer:(state: { profilePage: { posts: Obj[]; newPostText: string; }; dialogsPage: { messagesData: MessagesObj[]; dialogsData: DialogsObj[]; };}) => void)=>{
+rerenderEntireTree = observer;
+}
+
 export  default state

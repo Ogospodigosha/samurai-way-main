@@ -7,10 +7,13 @@ import {AppPropsType, Obj} from "../../redux/state";
 
 
 type profileType = {
-    addPost: (postMessage: string)=>void
+    addPost: ()=>void
+    updateNewPostText: (newText: string)=>void
     ProfileState: {
         posts: Array<Obj>
+        newPostText: string
     }
+
 }
 
 
@@ -18,6 +21,8 @@ export const Profile = (props: profileType) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts posts={props.ProfileState.posts} addPost={props.addPost}/>
+            <MyPosts posts={props.ProfileState.posts}
+                      newPostText={props.ProfileState.newPostText}
+                     addPost={props.addPost} updateNewPostText={props.updateNewPostText}/>
         </div>)
 }
