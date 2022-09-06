@@ -1,40 +1,55 @@
-let  rerenderEntireTree =(state:{ profilePage: { posts: Obj[]; newPostText: string; }; dialogsPage: { messagesData: MessagesObj[]; dialogsData: DialogsObj[]; }; })=> {
+let  rerenderEntireTree =(state:RootStateType)=> {
 
 }
 
-export type AppPropsType = {
-    posts?: Array<Obj>
-    dialogsData?: Array<DialogsObj>
-    messagesData?: Array<MessagesObj>
-}
-export type Obj = {
+// export type AppPropsType = {
+//     posts?: Array<Obj>
+//     dialogsData?: Array<DialogsObj>
+//     messagesData?: Array<MessagesObj>
+// }
+export type PostType = {
     id: number
     message: string
     likeskount: string
 }
-export type DialogsObj = {
-    id: string
-    name: string
-}
-export type MessagesObj = {
+export type DialogType = {
     id: number
     message: string
 }
-export type stateType ={
-    updateNewPostText: (newText: string)=> void
-    addPost: ()=>void
-    state: {
-        profilePage: {
-            posts: Array<Obj>
-            newPostText: string
-        },
-        dialogsPage: {
-            messagesData:Array<MessagesObj>
-            dialogsData:Array<DialogsObj>
-        }
-    }
+export type MessageType = {
+    id: string
+    name: string
 }
-let state = {
+export type ProfilePageType ={
+    posts:Array<PostType>
+    newPostText: string
+}
+export type DialogPageType ={
+    messagesData: Array<DialogType>
+    dialogsData: Array<MessageType>
+}
+
+export type RootStateType = {
+    profilePage:ProfilePageType
+    dialogsPage: DialogPageType
+}
+
+// export type stateType ={
+//     updateNewPostText: (newText: string)=> void
+//     addPost: ()=>void
+//     state: {
+//         profilePage: {
+//             posts: Array<PostType>
+//             newPostText: string
+//         },
+//         dialogsPage: {
+//             messagesData:Array<MessageType>
+//             dialogsData:Array<DialogType>
+//         }
+//     }
+// }
+
+let state: RootStateType = {
     profilePage: {
         posts: [
             {id: 1, message: 'Hi. how are you?', likeskount: "0"},
@@ -58,7 +73,7 @@ let state = {
     }
 }
 export const addPost=()=>{
-    let newPost = {id:5, message: state.profilePage.newPostText, likeskount:"0"}
+    let newPost:PostType = {id:5, message: state.profilePage.newPostText, likeskount:"0"}
     state.profilePage.posts.push(newPost)
     state.profilePage.newPostText ="";
     rerenderEntireTree(state);
@@ -68,7 +83,7 @@ export const updateNewPostText=(newText: string)=>{
     rerenderEntireTree(state);
 }
 
-export const subscribe = (observer:(state: { profilePage: { posts: Obj[]; newPostText: string; }; dialogsPage: { messagesData: MessagesObj[]; dialogsData: DialogsObj[]; };}) => void)=>{
+export const subscribe = (observer:(state:RootStateType ) => void)=>{
 rerenderEntireTree = observer;
 }
 

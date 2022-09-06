@@ -2,10 +2,10 @@ import React from "react";
 import './MyPosts.module.css'
 import classes from './MyPosts.module.css'
 import {Post} from "./Post/Post";
-import {AppPropsType, Obj} from "../../../redux/state";
+import {PostType} from "../../../redux/state";
 
 type MyPostsType = {
-    posts: Array<Obj>
+    posts: Array<PostType>
     addPost: ()=>void
     newPostText: string
     updateNewPostText: (newText: string)=>void
