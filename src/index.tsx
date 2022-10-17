@@ -15,5 +15,5 @@ import { BrowserRouter } from 'react-router-dom';
 }
 
 
-rerenderEntireTree(store._state)
+rerenderEntireTree(store.getState())
 store.subscribe(rerenderEntireTree)
