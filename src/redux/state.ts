@@ -9,6 +9,7 @@ export type StoreType = {
 
 
 export type ActionsType = ReturnType<typeof AddPostAC> | ReturnType<typeof UpdateNewPostAC>
+    | ReturnType<typeof UpdateNewPostBodyAC>| ReturnType<typeof SendMessageAC>
 
 export const AddPostAC =(newPostText: string)=>{
     return {type:"ADD-POST", newPostText: newPostText} as const
@@ -16,6 +17,13 @@ export const AddPostAC =(newPostText: string)=>{
 export const UpdateNewPostAC =(newText: string)=>{
    return {type:"UPDATE-NEW-POST-TEXT", newText: newText } as const
 }
+export const UpdateNewPostBodyAC =(body: string)=>{
+    return {type: "UPDATE-NEW-MESSAGE-BODY", body } as const
+}
+export const SendMessageAC =()=>{
+    return {type: "SEND-MESSAGE" } as const
+}
+
 let store: StoreType = {
     _state: {
         profilePage: {
@@ -32,6 +40,7 @@ let store: StoreType = {
                 {id: 3, message: 'How are you?'},
                 {id: 4, message: 'Im fine'}
             ],
+            newMessageBody: "",
             dialogsData: [
                 {id: "1", name: 'Gosha'},
                 {id: "2", name: 'Misha'},
@@ -58,6 +67,14 @@ let store: StoreType = {
         } else if (action.type === "UPDATE-NEW-POST-TEXT") {
             this._state.profilePage.newPostText = action.newText
             this._callSubscriber(this._state);
+        } else if (action.type === "UPDATE-NEW-MESSAGE-BODY") {
+            this._state.dialogsPage.newMessageBody = action.body
+            this._callSubscriber(this._state)
+        } else if (action.type === "SEND-MESSAGE") {
+            let body = this._state.dialogsPage.newMessageBody;
+            this._state.dialogsPage.newMessageBody = ""
+            this._state.dialogsPage.messagesData.push({id:5,message: body})
+            this._callSubscriber(this._state)
         }
     }
 
@@ -87,6 +104,7 @@ export type ProfilePageType ={
 }
 export type DialogPageType ={
     messagesData: Array<DialogType>
+    newMessageBody: string
     dialogsData: Array<MessageType>
 }
 
