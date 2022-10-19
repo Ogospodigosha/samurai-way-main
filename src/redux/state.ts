@@ -1,3 +1,6 @@
+import {profileReducer} from "./profile-reducer";
+import {dialogsReducer} from "./dialogs-reducer";
+import {sidebarReducer} from "./sidebar-reducer";
 
 export type StoreType = {
     _state: RootStateType
@@ -5,6 +8,7 @@ export type StoreType = {
     subscribe: (observer:(state:RootStateType)=>void)=>void
     getState: ()=> RootStateType
     dispatch: (action: ActionsType)=> void
+
 }
 
 
@@ -47,7 +51,8 @@ let store: StoreType = {
                 {id: "3", name: 'Valera'},
                 {id: "4", name: 'Olga'}
             ]
-        }
+        },
+        sidebar: {}
     },
     _callSubscriber(state:RootStateType){
         console.log("state changed")
@@ -58,24 +63,29 @@ let store: StoreType = {
     getState() {
         return this._state
     },
-    dispatch(action) {
-        if (action.type === "ADD-POST") {
-            let newPost:PostType = {id:5, message: action.newPostText, likeskount:"0"}
-            this._state.profilePage.posts.push(newPost)
-            this._state.profilePage.newPostText ="";
-            this._callSubscriber(this._state);
-        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
-            this._state.profilePage.newPostText = action.newText
-            this._callSubscriber(this._state);
-        } else if (action.type === "UPDATE-NEW-MESSAGE-BODY") {
-            this._state.dialogsPage.newMessageBody = action.body
-            this._callSubscriber(this._state)
-        } else if (action.type === "SEND-MESSAGE") {
-            let body = this._state.dialogsPage.newMessageBody;
-            this._state.dialogsPage.newMessageBody = ""
-            this._state.dialogsPage.messagesData.push({id:5,message: body})
-            this._callSubscriber(this._state)
-        }
+    dispatch(action: ActionsType) {
+        this._state.profilePage =  profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action )
+        this._state.sidebar = sidebarReducer(this._state.sidebar, {})
+        this._callSubscriber(this._state)
+
+        // if (action.type === "ADD-POST") {
+        //     let newPost:PostType = {id:5, message: action.newPostText, likeskount:"0"}
+        //     this._state.profilePage.posts.push(newPost)
+        //     this._state.profilePage.newPostText ="";
+        //     this._callSubscriber(this._state);
+        // } else if (action.type === "UPDATE-NEW-POST-TEXT") {
+        //     this._state.profilePage.newPostText = action.newText
+        //     this._callSubscriber(this._state);
+        // } else if (action.type === "UPDATE-NEW-MESSAGE-BODY") {
+        //     this._state.dialogsPage.newMessageBody = action.body
+        //     this._callSubscriber(this._state)
+        // } else if (action.type === "SEND-MESSAGE") {
+        //     let body = this._state.dialogsPage.newMessageBody;
+        //     this._state.dialogsPage.newMessageBody = ""
+        //     this._state.dialogsPage.messagesData.push({id:5,message: body})
+        //     this._callSubscriber(this._state)
+        // }
     }
 
 }
@@ -111,6 +121,7 @@ export type DialogPageType ={
 export type RootStateType = {
     profilePage:ProfilePageType
     dialogsPage: DialogPageType
+    sidebar: {  }
 }
 
 
