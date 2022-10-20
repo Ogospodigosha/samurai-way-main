@@ -69,23 +69,6 @@ let store: StoreType = {
         this._state.sidebar = sidebarReducer(this._state.sidebar, {})
         this._callSubscriber(this._state)
 
-        // if (action.type === "ADD-POST") {
-        //     let newPost:PostType = {id:5, message: action.newPostText, likeskount:"0"}
-        //     this._state.profilePage.posts.push(newPost)
-        //     this._state.profilePage.newPostText ="";
-        //     this._callSubscriber(this._state);
-        // } else if (action.type === "UPDATE-NEW-POST-TEXT") {
-        //     this._state.profilePage.newPostText = action.newText
-        //     this._callSubscriber(this._state);
-        // } else if (action.type === "UPDATE-NEW-MESSAGE-BODY") {
-        //     this._state.dialogsPage.newMessageBody = action.body
-        //     this._callSubscriber(this._state)
-        // } else if (action.type === "SEND-MESSAGE") {
-        //     let body = this._state.dialogsPage.newMessageBody;
-        //     this._state.dialogsPage.newMessageBody = ""
-        //     this._state.dialogsPage.messagesData.push({id:5,message: body})
-        //     this._callSubscriber(this._state)
-        // }
     }
 
 }

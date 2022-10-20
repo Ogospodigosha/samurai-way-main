@@ -2,8 +2,8 @@ import React, { ChangeEvent } from 'react';
 import classes from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import state, {DialogPageType, SendMessageAC, UpdateNewPostBodyAC} from "../../redux/state";
-import store from "../../redux/state";
+import state, {DialogPageType, SendMessageAC, UpdateNewPostBodyAC} from "../../redux/store";
+import {store} from "../../redux/redux-store";
 
 
 
@@ -26,7 +26,8 @@ export const Dialogs = (props: dialogsType) => {
         store.dispatch(SendMessageAC())
     }
     let onNewMessageChange = (event: ChangeEvent<HTMLTextAreaElement>)=>{
-       let body = event.currentTarget.value
+        debugger
+       let body = event.target.value
         store.dispatch(UpdateNewPostBodyAC(body))
     }
     return (
